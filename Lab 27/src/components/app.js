@@ -113,8 +113,6 @@ class Results extends React.Component {
   }
 }
 
-//Heath helped me with the following:
-
 class App extends React.Component {
   constructor(props) {
     super(props);

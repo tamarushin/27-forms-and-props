@@ -1,0 +1,25 @@
+body {
+  background-color: rgb(245, 240, 240);
+}
+
+form {
+  width: 600px;
+  padding: 20px;
+}
+
+.error {
+  border: 5px solid red;
+}
+
+input {
+  display: flex;
+}
+
+ul {
+  list-style: none;
+  width: 900px;
+}
+
+li {
+  background-color: rgb(255, 218, 218);
+}

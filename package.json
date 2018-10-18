@@ -1,17 +1,27 @@
 {
-  "name": "counter",
+  "name": "27-forms-and-props",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Lab 27",
+  "main": "webpack.common.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose --coverage",
     "watch": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamarushin/27-forms-and-props.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Tama Rushin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tamarushin/27-forms-and-props/issues"
+  },
+  "homepage": "https://github.com/tamarushin/27-forms-and-props#readme",
+  "dependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",

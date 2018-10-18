@@ -1,51 +1,60 @@
 'use strict';
 
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import superagent from 'superagent';
 import SearchForm from './search/searchForm';
 import SearchResultList from './search/searchResultList';
 
 const redditAPI = `https://www.reddit.com/r`;
 
-export default class App extends Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       topics: [],
+      search: '',
+      range: 0,
       failure: false,
     };
     this.searchReddit = this.searchReddit.bind(this);
-    this.fetchData = this.fetchData.bind(this);
+    this.handleSearchTopic = this.handleSearchTopic.bind(this);
+    this.handleSearchRange = this.handleSearchRange.bind(this);
   }
 
-
-  searchReddit(search, range) {
-    let url = `${redditAPI}/${search}.json?limit=${range}`;
-    console.log('clicked');
-    return this.fetchData(url)
-      .then(topics => this.setState(Object.assign(...this.state, {topics: topics.body.data.children}, {failure: false}),() => console.log('state',this.state))
-      );
+  handleSearchTopic(event) {
+    this.setState({search: event.target.value});
   }
 
-  fetchData(url) {
-    return superagent.get(url)
-      .then(result => {
-        return result;
+  handleSearchRange(event) {
+    this.setState({ range: event.target.value });
+  }
+
+  searchReddit(event) {
+    event.preventDefault();
+    let url = `${redditAPI}/${this.state.search}.json?limit=${this.state.range}`;
+    superagent.get(url)
+      .then(response => {
+        this.setState({ topics: response.body.data.children, failure: false });
       })
-      .catch(() => {
-        console.log('errooooor');
-        this.setState({failure: true});
+      .catch(error => { //eslint-disable-line
+        this.setState({ topics: [], failure: true });
       });
   }
 
   render() {
+    console.log(this.state);
     return (
       <Fragment>
         <main>
-          <SearchForm searchMethod={this.searchReddit} failure={this.state.failure}/>
+          <SearchForm 
+            handleSubmit={this.searchReddit} 
+            handleTopic={this.handleSearchTopic}
+            handleRange={this.handleSearchRange}
+            failure={this.state.failure} 
+          />
 
-          <SearchResultList list={this.state.topics}/>
+          <SearchResultList list={this.state.topics} />
         </main>
       </Fragment>
     );

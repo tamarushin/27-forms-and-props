@@ -5,7 +5,7 @@ require('dotenv').config();
 const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const production = process.env.NODE_ENV === 'production';
+const production = process.env.NODE_ENV === 'production'; //eslint-disable-line
 
 const webpackConfig = module.exports = {};
 
